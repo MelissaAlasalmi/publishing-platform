@@ -12,8 +12,12 @@ const logout = () => {
 
 const register = (req, res) => {
   const user = new User(req.body);
-  user.register(user.data);
-  res.send('thanks for trying to register');
+  user.register(user);
+  if (user.errors.length > 0) {
+    res.send(user.errors);
+  } else {
+    res.send("Yay!");
+  }
 };
 
 const home = (_req, res) => {
